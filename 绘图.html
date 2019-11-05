@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用canvas绘图</title>
+<style>
+	#myCanvas{
+		border:1px solid black;
+	}
+</style>
+</head>
+<body>
+	<canvas id="myCanvas" width="860" height="480">
+		
+	</canvas>
+
+<script>
+	//获取上下文环境
+	var canvas,pen;
+	canvas=document.getElementById("myCanvas");
+	pen=canvas.getContext("2d");
+	
+	//设置画笔
+	pen.lineWidth=1;
+	pen.strokeStyle="blue";
+	
+	var mousePress=false;/*是否按下鼠标来移动鼠标*/
+	var last=null;/*绘图结束后鼠标的那个点*/
+	
+	//当事件发生取得当前事件点的坐标
+	function pos(event){
+		var ex,ey;
+		ex=event.clientX;
+		ey=event.clientY;
+		return{
+			x:ex,
+			y:ey
+		}
+	}
+	
+	//开始绘图函数
+	function start(event){
+		mousePress=true;
+	}
+	
+	//绘图函数
+	function draw(event){
+		if(mousePress)
+			return;
+		var xy=pos(event);
+		if(last != null){
+			pen.beginPath();
+			pen.moveTo(last.x,last.y);
+			pen.lineTo(xy.x,xy.y);
+			pen.stroke();
+		}
+		last=xy;
+	}
+	
+	//结束绘图
+	function finish(event){
+		mousePress=false;
+		last=null;
+	}
+	
+	canvas.onmousedown=start;
+	canvas.onmousemove=draw;
+	canvas.onmouseup=finish;
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

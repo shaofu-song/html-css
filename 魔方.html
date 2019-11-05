@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>魔方</title>
+<style>
+	*{
+		margin:0;
+		padding:0;
+	}
+	.container{
+		width:300px;
+		height:300px;
+		/*border:1px solid #000;*/
+		margin:150px auto;
+		perspective:20000000px;
+	}
+	.box{
+		width:300px;
+		height:300px;
+		transform-style:preserve-3d;/*控制子元素保持3D转换*/
+		
+		/*测试代码*/
+		/*transform:rotateX(45deg) rotateY(45deg);*/
+		animation:ro 5s linear infinite;/*一直转*/
+	}
+	@keyframes ro{
+		0%{
+			transform:rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+		}
+		100%{
+			transform:rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+		}
+	}
+	.box-page{
+		width:300px;
+		height:300px;
+		/*位置初始化*/
+		position:absolute;/*为甚麽黄色在上面*/
+		transform-style:preserve-3d;
+	}
+	.top{
+		/*background-color:red;*/
+		transform:translateZ(150px);/*沿着z轴移动*/
+	}
+	.bottom{
+		/*background-color:green;*/
+		transform:translateZ(-150px) rotateX(180deg);
+	}
+	.left{
+		/*background-color:orange;*/
+		transform:translateX(-150px) rotateY(-90deg);
+	}
+	.right{
+		/*background-color:pink;*/
+		transform:translateX(150px) rotateY(90deg);/*沿着x轴移动,沿着y轴旋转*/
+	}
+	.before{
+		/*background-color:blue;*/
+		transform:translateY(150px) rotateX(-90deg);
+	}
+	.after{
+		/*background-color:yellow;*/
+		transform:translateY(-150px) rotateX(90deg);
+	}
+	/*如何重复转，周期性定时器*/
+	.box-page div:nth-child(1){
+		animation:ro1 15s linear;
+		/* animation-direction:alternate; */
+		animation-iteration-count:10;
+	}
+	.box-page div:nth-child(2){
+		animation:ro1 15s linear 0.5s;
+		/* animation-direction:alternate; */
+		animation-iteration-count:10;
+	}
+	.box-page div:nth-child(3){
+		animation:ro1 15s linear 1s;
+		/* animation-direction:alternate; */
+		animation-iteration-count:10;
+	}
+	.box-page div:nth-child(4){
+		animation:ro1 15s linear 1.5s;
+		/* animation-direction:alternate; */
+		animation-iteration-count:10;
+	}
+	.box-page div:nth-child(5){
+		animation:ro1 15s linear 2s;
+		/* animation-direction:alternate; */
+		animation-iteration-count:10;
+	}
+	.box-page div:nth-child(6){
+		animation:ro1 15s linear 2.5s;
+		/* animation-direction:alternate; */
+		animation-iteration-count:10;
+	}
+	.box-page div:nth-child(7){
+		animation:ro1 15s linear 3s;
+		/* animation-direction:alternate; */
+		animation-iteration-count:10;
+	}
+	.box-page div:nth-child(8){
+		animation:ro1 15s linear 3.5s;
+		/* animation-direction:alternate; */
+		animation-iteration-count:10;
+	}
+	.box-page div:nth-child(9){
+		animation:ro1 15s linear 4s;
+		/* animation-direction:alternate; */
+		animation-iteration-count:10;
+	}
+	@keyframes ro1{
+		0%{
+			transform:translateZ(0px) scale(1) rotateZ(0deg);
+		}
+		10%{
+			transform:translateZ(0px) scale(1) rotateZ(0deg);
+		}
+		35%{
+			transform:translateZ(300px) scale(0) rotateZ(720deg);
+		}
+		50%{
+			transform:translateZ(300px) scale(0) rotateZ(720deg);
+		}
+		75%{
+			transform:translateZ(0px) scale(1) rotateZ(0deg);
+		}
+		100%{
+			transform:translateZ(0px) scale(1) rotateZ(0deg);
+		}
+		/* 0%{
+			transform:translateZ(0px) scale(1) rotateZ(0deg);
+		}
+		45%{
+			transform:translateZ(300px) scale(0) rotateZ(720deg);
+		}
+		55%{
+			transform:translateZ(300px) scale(0) rotateZ(720deg);
+		}
+		100%{
+			transform:translateZ(0px) scale(1) rotateZ(0deg);
+		} */
+	}
+</style>
+</head>
+<body>
+<!-- 容器 -->
+<div class="container">
+	<div class="box">
+		<div class="box-page top"></div>
+		<div class="box-page bottom"></div>
+		<div class="box-page left"></div>
+		<div class="box-page right"></div>
+		<div class="box-page before"></div>
+		<div class="box-page after"></div>
+	</div>
+</div>
+
+<script>
+	var arr=document.querySelectorAll(".box-page");	
+	//遍历6个面中的每一个面
+	for(var n=0;n<arr.length;n++){
+		//外层循环遍历行
+		for(var r=0;r<3;r++){
+			//内层循环遍历列
+			for(var c=0;c<3;c++){
+				//创建元素
+				var divs=document.createElement("div");
+				divs.style.cssText="width:100px;height:100px;border:2px solid #fff;box-sizing:border-box;background-color:red;position:absolute;background-image:url(./图片/a"+n+".jpg);background-size:300px 300px;";
+				arr[n].appendChild(divs);
+				
+				divs.style.left=c*100+"px";
+				divs.style.top=r*100+"px";
+				
+				//背景图像定位
+				divs.style.backgroundPositionX=-c*100+"px";//为甚麽是负的
+				divs.style.backgroundPositionY=-r*100+"px";
+			}
+		}
+		
+	}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
