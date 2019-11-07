@@ -8,7 +8,7 @@
   * 3. 利用animate动画库实现弹入弹出动画。
   * 4. 利用JS的DOM操作onscroll实现返回顶部和呼吸灯效果。
 * 链接：
-  * [oppo主页](http://47.104.149.241:88/html-css/oppo-yemian.html)
+  * [oppo主页](http://47.104.149.241:88/html-css/oppo-yemian.html)  加载图片有延迟
 ### 魔方动画
 * 项目介绍：
   * 该项目实现魔方的旋转，以及飞出飞回的效果。
